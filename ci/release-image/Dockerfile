@@ -33,9 +33,10 @@ RUN apt-get update \
   nodejs \
   npm \
   golang \
-  ruby-full \
-  openjdk-8-jdk \
-  maven
+  ruby-full 
+  # \
+  # openjdk-8-jdk \
+  # maven
 
 RUN echo '//registry.npmjs.org/:_authToken'="abcd" > ~/.npmrc \
   && sudo apt update && sudo apt install build-essential ruby-dev ruby -y && sudo gem install compass
