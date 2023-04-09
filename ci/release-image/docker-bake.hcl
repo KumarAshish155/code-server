@@ -55,6 +55,10 @@ target "code-server-debian-11" {
 
 target "code-server-ubuntu-focal" {
     dockerfile = "ci/release-image/Dockerfile"
+    tags = concat(
+        gen_tags_for_docker_and_ghcr("ubuntu"),
+        gen_tags_for_docker_and_ghcr("focal"),
+    )
     args = {
         BASE = "ubuntu:focal"
     }

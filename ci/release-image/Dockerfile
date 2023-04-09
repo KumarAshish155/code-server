@@ -6,7 +6,8 @@ COPY release-packages/code-server*.deb /tmp/
 
 FROM $BASE
 
-ENV TZ=Asia/Kolkata
+ENV TZ=Asia/Kolkata \
+    DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update \
   && apt-get install -y \
