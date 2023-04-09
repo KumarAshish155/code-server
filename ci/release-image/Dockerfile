@@ -23,7 +23,20 @@ RUN apt-get update \
     vim.tiny \
     lsb-release \
   && git lfs install \
-  && rm -rf /var/lib/apt/lists/*
+  && rm -rf /var/lib/apt/lists/* \
+  nodejs \
+  npm
+
+RUN sudo apt install golang -y
+
+RUN \
+  echo '//registry.npmjs.org/:_authToken'="abcd" > ~/.npmrc \
+  && sudo apt update && sudo apt install build-essential ruby-dev ruby -y && sudo gem install compass
+
+RUN \
+  sudo apt-get install openjdk-8-jdk -y && sudo apt-get install maven -y
+
+RUN sudo npm install -g bower && sudo npm install -g yarn && sudo npm install -g grunt
 
 # https://wiki.debian.org/Locale#Manually
 RUN sed -i "s/# en_US.UTF-8/en_US.UTF-8/" /etc/locale.gen \
