@@ -25,6 +25,8 @@ RUN apt-get update \
   && git lfs install \
   && rm -rf /var/lib/apt/lists/* \
   && rm -rf /etc/apt/sources.list.d/*
+
+RUN add-apt-repository ppa:openjdk-r/ppa
   
 RUN apt-get update \
   && apt-get install -y \
