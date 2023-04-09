@@ -16,7 +16,6 @@ variable "GITHUB_REGISTRY" {
 
 group "default" {
     targets = [
-        "code-server-debian-11", 
         "code-server-ubuntu-focal",
     ]
 }

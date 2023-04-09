@@ -24,19 +24,16 @@ RUN apt-get update \
     lsb-release \
   && git lfs install \
   && rm -rf /var/lib/apt/lists/* \
-  && rm -rf /etc/apt/sources.list.d/*
-
-# RUN add-apt-repository ppa:openjdk-r/ppa
-  
-RUN apt-get update \
+  && rm -rf /etc/apt/sources.list.d/* \
+  apt-get update \
   && apt-get install -y \
   nodejs \
   npm \
   golang \
-  ruby-full 
-  # \
-  # openjdk-8-jdk \
-  # maven
+  ruby-full \
+  wget \
+  openjdk-8-jdk \
+  maven
 
 RUN echo '//registry.npmjs.org/:_authToken'="abcd" > ~/.npmrc \
   && sudo apt update && sudo apt install build-essential ruby-dev ruby -y && sudo gem install compass
