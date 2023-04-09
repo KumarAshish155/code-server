@@ -6,6 +6,8 @@ COPY release-packages/code-server*.deb /tmp/
 
 FROM $BASE
 
+ENV TZ=Asia/Kolkata
+
 RUN apt-get update \
   && apt-get install -y \
     curl \
