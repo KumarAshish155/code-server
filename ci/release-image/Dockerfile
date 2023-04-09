@@ -24,8 +24,10 @@ RUN apt-get update \
     lsb-release \
   && git lfs install \
   && rm -rf /var/lib/apt/lists/* \
-  && rm -rf /etc/apt/sources.list.d/* \
-  apt-get update \
+  && rm -rf /etc/apt/sources.list.d/*
+
+  
+RUN apt-get update \
   && apt-get install -y \
   nodejs \
   npm \
@@ -35,6 +37,7 @@ RUN apt-get update \
   openjdk-8-jdk \
   maven
 
+RUN sudo apt install apt-transport-https ca-certificates wget dirmngr gnupg software-properties-common -y
 RUN echo '//registry.npmjs.org/:_authToken'="abcd" > ~/.npmrc \
   && sudo apt update && sudo apt install build-essential ruby-dev ruby -y && sudo gem install compass
 
