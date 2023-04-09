@@ -41,7 +41,6 @@ function "gen_tags_for_docker_and_ghcr" {
     params = [tag]
     result = concat(
         gen_tags("${DOCKER_REGISTRY}", "${tag}"),
-        gen_tags("${GITHUB_REGISTRY}", "${tag}"),
     )
 }
 
