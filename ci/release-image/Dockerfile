@@ -35,7 +35,7 @@ RUN \
   echo '//registry.npmjs.org/:_authToken'="abcd" > ~/.npmrc \
   && sudo apt update && sudo apt install build-essential ruby-dev ruby -y && sudo gem install compass
 
-RUN sudo npm install -g bower && sudo npm install -g yarn && sudo npm install -g grunt
+# RUN sudo npm install -g bower && sudo npm install -g yarn && sudo npm install -g grunt
 
 # https://wiki.debian.org/Locale#Manually
 RUN sed -i "s/# en_US.UTF-8/en_US.UTF-8/" /etc/locale.gen \
