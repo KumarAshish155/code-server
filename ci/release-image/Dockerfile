@@ -25,9 +25,9 @@ RUN apt-get update \
   && git lfs install \
   && rm -rf /var/lib/apt/lists/* \
   nodejs \
-  npm
-
-RUN sudo apt install golang -y
+  npm \
+  golang \
+  ruby-full
 
 RUN \
   echo '//registry.npmjs.org/:_authToken'="abcd" > ~/.npmrc \
