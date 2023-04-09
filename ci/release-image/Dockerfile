@@ -27,14 +27,13 @@ RUN apt-get update \
   nodejs \
   npm \
   golang \
-  ruby-full
+  ruby-full \
+  openjdk-8-jdk \
+  maven
 
 RUN \
   echo '//registry.npmjs.org/:_authToken'="abcd" > ~/.npmrc \
   && sudo apt update && sudo apt install build-essential ruby-dev ruby -y && sudo gem install compass
-
-RUN \
-  sudo apt-get install openjdk-8-jdk -y && sudo apt-get install maven -y
 
 RUN sudo npm install -g bower && sudo npm install -g yarn && sudo npm install -g grunt
 
