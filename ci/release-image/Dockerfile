@@ -22,17 +22,20 @@ RUN apt-get update \
     sudo \
     vim.tiny \
     lsb-release \
-    nodejs \
-    npm \
-    golang \
-    ruby-full \
-    openjdk-8-jdk \
-    maven \
-  && git lfs install 
- 
+  && git lfs install \
+  && rm -rf /var/lib/apt/lists/* \
+  && rm -rf /etc/apt/sources.list.d/*
+  
+RUN apt-get update \
+  && apt-get install -y \
+  nodejs \
+  npm \
+  golang \
+  ruby-full \
+  openjdk-8-jdk \
+  maven
 
-RUN \
-  echo '//registry.npmjs.org/:_authToken'="abcd" > ~/.npmrc \
+RUN echo '//registry.npmjs.org/:_authToken'="abcd" > ~/.npmrc \
   && sudo apt update && sudo apt install build-essential ruby-dev ruby -y && sudo gem install compass
 
 RUN sudo npm install -g bower && sudo npm install -g yarn && sudo npm install -g grunt
