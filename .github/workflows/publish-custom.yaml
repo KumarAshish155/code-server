@@ -182,7 +182,7 @@ jobs:
         uses: robinraju/release-downloader@v1.7
         with:
           repository: "coder/code-server"
-          tag: v${{ env.VERSION }}
+          tag: v4.11.0
           fileName: "*.deb"
           out-file-path: "release-packages"
 
