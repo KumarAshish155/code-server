@@ -26,7 +26,7 @@ RUN apt-get update \
   && rm -rf /var/lib/apt/lists/* \
   && rm -rf /etc/apt/sources.list.d/*
 
-RUN add-apt-repository ppa:openjdk-r/ppa
+# RUN add-apt-repository ppa:openjdk-r/ppa
   
 RUN apt-get update \
   && apt-get install -y \
