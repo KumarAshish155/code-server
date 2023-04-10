@@ -29,19 +29,20 @@ RUN apt-get update \
   && rm -rf /var/lib/apt/lists/* \
   && rm -rf /etc/apt/sources.list.d/*
 
-  
+
+RUN apt install -y build-essential apt-transport-https ca-certificates \
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash \
+nvm install 12
+
 RUN apt-get update \
   && apt-get install -y \
-  nodejs \
-  npm \
   golang \
   ruby-full \
   wget \
   openjdk-8-jdk \
   maven
 
-RUN echo '//registry.npmjs.org/:_authToken'="abcd" > ~/.npmrc \
-  && sudo apt update && sudo apt install build-essential ruby-dev ruby -y && sudo gem install compass
+RUN sudo apt update && sudo apt install  ruby-dev ruby -y && sudo gem install compass
 
 RUN sudo npm install -g bower && sudo npm install -g yarn && sudo npm install -g grunt
 
