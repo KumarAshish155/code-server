@@ -30,13 +30,12 @@ RUN apt-get update \
   && rm -rf /etc/apt/sources.list.d/*
 
 
-RUN apt install -y build-essential apt-transport-https ca-certificates \
-curl -sL https://deb.nodesource.com/setup_12.x | sudo bash - \
+RUN apt install -y build-essential apt-transport-https ca-certificates
 
-
-RUN sudo apt install -y \
-nodejs \
-npm
+SHELL ["/bin/bash", "--login", "-i", "-c"]
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.2/install.sh | bash
+RUN source /root/.bashrc && nvm install 12.14.1
+SHELL ["/bin/bash", "--login", "-c"]
 
 
 
