@@ -33,6 +33,8 @@ RUN apt-get update \
 RUN apt install -y build-essential apt-transport-https ca-certificates \
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 
+RUN apt-get update 
+
 RUN nvm install 12
 
 RUN apt-get update \
