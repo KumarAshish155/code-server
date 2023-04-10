@@ -30,7 +30,6 @@ RUN apt-get update \
   && rm -rf /etc/apt/sources.list.d/*
 
 
-RUN apt install -y build-essential apt-transport-https ca-certificates
 
 SHELL ["/bin/bash", "--login", "-i", "-c"]
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.2/install.sh | bash
@@ -48,6 +47,10 @@ RUN apt-get update \
   wget \
   openjdk-8-jdk \
   maven
+
+
+RUN apt install -y build-essential apt-transport-https ca-certificates
+
 
 RUN sudo apt update && sudo apt install  ruby-dev ruby -y && sudo gem install compass
 
