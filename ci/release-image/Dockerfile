@@ -36,7 +36,11 @@ RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.2/install.sh | b
 RUN source /root/.bashrc && nvm install 12.14.1
 SHELL ["/bin/bash", "--login", "-c"]
 
+RUN nvm install node
 
+RUN node -v
+
+RUN npm -v
 
 
 
