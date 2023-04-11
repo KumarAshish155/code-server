@@ -33,10 +33,8 @@ RUN apt-get update \
 
 SHELL ["/bin/bash", "--login", "-i", "-c"]
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.2/install.sh | bash
-RUN source /root/.bashrc && nvm install 12.14.1
+RUN source /root/.bashrc && nvm install node v14.21.3
 SHELL ["/bin/bash", "--login", "-c"]
-
-RUN nvm install node
 
 RUN node -v
 
