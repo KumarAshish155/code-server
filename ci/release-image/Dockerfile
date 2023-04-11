@@ -30,8 +30,6 @@ RUN apt-get update \
   && rm -rf /etc/apt/sources.list.d/*
 
 
-RUN apt install -y build-essential apt-transport-https ca-certificates
-RUN sudo apt update && sudo apt install  ruby-dev ruby -y && sudo gem install compass
 
 ENV NODE_VERSION=16.13.0
 RUN apt install -y curl
@@ -44,7 +42,6 @@ ENV PATH="/root/.nvm/versions/node/v${NODE_VERSION}/bin/:${PATH}"
 RUN node --version
 RUN npm --version
 
-RUN npm install -g bower && npm install -g yarn && npm install -g grunt
 
 
 RUN apt-get update \
@@ -55,6 +52,15 @@ RUN apt-get update \
   openjdk-8-jdk \
   maven
 
+
+RUN apt install -y build-essential apt-transport-https ca-certificates
+
+
+RUN sudo apt update && sudo apt install  ruby-dev ruby -y && sudo gem install compass
+
+RUN npm --version
+
+RUN npm install -g bower && npm install -g yarn && npm install -g grunt
 
 # https://wiki.debian.org/Locale#Manually
 RUN sed -i "s/# en_US.UTF-8/en_US.UTF-8/" /etc/locale.gen \
