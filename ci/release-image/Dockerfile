@@ -44,24 +44,6 @@ RUN npm --version
 
 
 
-RUN apt-get update \
-  && apt-get install -y \
-  golang \
-  ruby-full \
-  wget \
-  openjdk-8-jdk \
-  maven
-
-
-RUN apt install -y build-essential apt-transport-https ca-certificates
-
-
-RUN sudo apt update && sudo apt install  ruby-dev ruby -y && sudo gem install compass
-
-RUN npm --version
-
-RUN npm install -g bower && npm install -g yarn && npm install -g grunt
-
 # https://wiki.debian.org/Locale#Manually
 RUN sed -i "s/# en_US.UTF-8/en_US.UTF-8/" /etc/locale.gen \
   && locale-gen
@@ -79,6 +61,25 @@ RUN ARCH="$(dpkg --print-architecture)" \
 
 COPY ci/release-image/entrypoint.sh /usr/bin/entrypoint.sh
 RUN --mount=from=packages,src=/tmp,dst=/tmp/packages dpkg -i /tmp/packages/code-server*$(dpkg --print-architecture).deb
+
+
+RUN apt-get update \
+  && apt-get install -y \
+  golang \
+  ruby-full \
+  wget \
+  openjdk-8-jdk \
+  maven
+
+
+RUN apt install -y build-essential apt-transport-https ca-certificates
+
+
+RUN sudo apt update && sudo apt install  ruby-dev ruby -y && sudo gem install compass
+
+RUN npm --version
+
+RUN npm install -g bower && npm install -g yarn && npm install -g grunt
 
 # Allow users to have scripts run on container startup to prepare workspace.
 # https://github.com/coder/code-server/issues/5177
