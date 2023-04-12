@@ -55,8 +55,9 @@ ENV NODE_VERSION=16.13.0
 RUN curl --silent -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
 
 # install node and npm LTS
-RUN source $NVM_DIR/nvm.sh \
-    && nvm install $NODE_VERSION \
+RUN source $NVM_DIR/nvm.sh
+
+RUN nvm install $NODE_VERSION \
     && nvm alias default $NODE_VERSION \
     && nvm use default \
     && nvm install 8.1.3 \
