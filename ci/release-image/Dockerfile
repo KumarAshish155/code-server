@@ -50,6 +50,8 @@ RUN ARCH="$(dpkg --print-architecture)" \
 COPY ci/release-image/entrypoint.sh /usr/bin/entrypoint.sh
 RUN --mount=from=packages,src=/tmp,dst=/tmp/packages dpkg -i /tmp/packages/code-server*$(dpkg --print-architecture).deb
 
+RUN apt-get -y install python python2.7
+
 RUN mkdir /usr/local/.nvm \
 mkdir /usr/local/node
 
