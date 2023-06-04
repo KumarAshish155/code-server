@@ -67,7 +67,7 @@ RUN npm --version
 
 RUN apt-get update \
   && apt-get install -y \
-  golang-1.20 \
+  # golang-1.20 \
   ruby-full \
   wget \
   openjdk-8-jdk \
@@ -75,6 +75,7 @@ RUN apt-get update \
   python \
   python2.7
 
+RUN sudo snap install go --classic
 
 RUN apt install -y build-essential apt-transport-https ca-certificates
 
