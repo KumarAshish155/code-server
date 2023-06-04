@@ -75,7 +75,7 @@ RUN apt-get update \
   python \
   python2.7
 
-RUN sudo snap install go --classic
+RUN sudo snap install -y go --classic
 
 RUN apt install -y build-essential apt-transport-https ca-certificates
 
