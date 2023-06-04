@@ -67,9 +67,8 @@ RUN npm --version
 #Installing Go Lang
 ENV GO_VERSION=1.20
 RUN ARCH="$(dpkg --print-architecture)" \
-echo $ARCH
-RUN wget -L "https://golang.org/dl/go${GO_VERSION}.linux-$ARCH.tar.gz" 
-RUN tar -xvf "go${GO_VERSION}.linux-$ARCH.tar.gz"
+curl -O -L "https://golang.org/dl/go${GO_VERSION}.linux-$ARCH.tar.gz" \
+tar -xvf "go${GO_VERSION}.linux-$ARCH.tar.gz"
 RUN mv go /usr/local
 ENV GOROOT=/usr/local/go
 ENV GOPATH=$HOME/go
