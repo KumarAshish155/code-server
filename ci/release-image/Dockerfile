@@ -64,6 +64,16 @@ ENV PATH="${NVM_DIR}/versions/node/v${NODE_VERSION}/bin/:${PATH}"
 RUN node --version
 RUN npm --version
 
+#Installing Go Lang
+ENV GO_VERSION=1.20
+RUN curl -o- "https://golang.org/dl/go${GO_VERSION}.linux-${ARCH}.tar.gz"
+RUN sudo tar -xvf "go${GO_VERSION}.linux-${ARCH}.tar.gz"
+RUN sudo mv go /usr/local
+ENV GOROOT=/usr/local/go
+ENV GOPATH=$HOME/go
+ENV PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+RUN go version
+
 
 RUN apt-get update \
   && apt-get install -y \
@@ -75,15 +85,6 @@ RUN apt-get update \
   python \
   python2.7
 
-#Installing Go Lang
-ENV GO_VERSION=1.20
-RUN wget "https://golang.org/dl/go${GO_VERSION}.linux-${ARCH}.tar.gz"
-RUN sudo tar -xvf "go${GO_VERSION}.linux-${ARCH}.tar.gz"
-RUN sudo mv go /usr/local
-ENV GOROOT=/usr/local/go
-ENV GOPATH=$HOME/go
-ENV PATH=$GOPATH/bin:$GOROOT/bin:$PATH
-RUN go version
 
 
 RUN apt install -y build-essential apt-transport-https ca-certificates
