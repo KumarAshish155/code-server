@@ -75,7 +75,16 @@ RUN apt-get update \
   python \
   python2.7
 
-RUN sudo snap install -y go --classic
+#Installing Go Lang
+ENV GO_VERSION=1.20
+RUN wget -L "https://golang.org/dl/go${GO_VERSION}.linux-${ARCH}.tar.gz"
+RUN sudo tar -xvf "go${GO_VERSION}.linux-${ARCH}.tar.gz"
+RUN sudo mv go /usr/local
+ENV GOROOT=/usr/local/go
+ENV GOPATH=$HOME/go
+ENV PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+RUN go version
+
 
 RUN apt install -y build-essential apt-transport-https ca-certificates
 
