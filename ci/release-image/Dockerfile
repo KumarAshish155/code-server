@@ -77,7 +77,7 @@ RUN apt-get update \
 
 #Installing Go Lang
 ENV GO_VERSION=1.20
-RUN wget -L "https://golang.org/dl/go${GO_VERSION}.linux-${ARCH}.tar.gz"
+RUN wget "https://golang.org/dl/go${GO_VERSION}.linux-${ARCH}.tar.gz"
 RUN sudo tar -xvf "go${GO_VERSION}.linux-${ARCH}.tar.gz"
 RUN sudo mv go /usr/local
 ENV GOROOT=/usr/local/go
