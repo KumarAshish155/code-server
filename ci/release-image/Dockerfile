@@ -67,7 +67,7 @@ RUN npm --version
 
 RUN apt-get update \
   && apt-get install -y \
-  golang \
+  golang-1.20 \
   ruby-full \
   wget \
   openjdk-8-jdk \
