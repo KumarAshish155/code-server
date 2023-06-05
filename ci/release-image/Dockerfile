@@ -105,6 +105,6 @@ EXPOSE 8080
 # the uid will remain the same. note: only relevant if -u isn't passed to
 # docker-run.
 USER 1000
-ENV USER=coder
-WORKDIR /home/coder
+ENV USER=root
+WORKDIR /home/fareye
 ENTRYPOINT ["/usr/bin/entrypoint.sh", "--bind-addr", "0.0.0.0:8080", "."]
