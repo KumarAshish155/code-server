@@ -70,9 +70,9 @@ RUN ARCH="$(dpkg --print-architecture)" \
 && curl -fsSL "https://golang.org/dl/go${GO_VERSION}.linux-$ARCH.tar.gz" |tar -C /usr/local -xzf -
 # RUN mv go /usr/local
 # ENV GOROOT=/usr/local/go
-ENV GOPATH=$HOME/go
+# ENV GOPATH=$HOME/go
 # ENV PATH=$GOPATH/bin:$GOROOT/bin:$PATH
-ENV PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
+ENV PATH=$PATH:/usr/local/go/bin
 
 RUN go version
 
@@ -102,7 +102,7 @@ RUN npm install -g bower && npm install -g yarn && npm install -g grunt
 # https://github.com/coder/code-server/issues/5177
 ENV ENTRYPOINTD=${HOME}/entrypoint.d
 
-EXPOSE 8080
+EXPOSE 8080 3001 3002 3003 8081 8082 8083
 # This way, if someone sets $DOCKER_USER, docker-exec will still work as
 # the uid will remain the same. note: only relevant if -u isn't passed to
 # docker-run.
