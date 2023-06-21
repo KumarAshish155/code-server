@@ -110,7 +110,7 @@ RUN code-server --install-extension ms-python.python
 RUN code-server --install-extension golang.Go
 RUN code-server --install-extension eamodio.gitlens
 RUN code-server --install-extension vscjava.vscode-java-pack
-RUN ode-server --install-extension vscjava.vscode-maven
+RUN code-server --install-extension vscjava.vscode-maven
 RUN code-server --install-extension vscjava.vscode-java-test
 RUN code-server --install-extension vscjava.vscode-java-debug
 
