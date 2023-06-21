@@ -106,6 +106,14 @@ EXPOSE 8080 3001 3002 3003 8081 8082 8083
 # This way, if someone sets $DOCKER_USER, docker-exec will still work as
 # the uid will remain the same. note: only relevant if -u isn't passed to
 # docker-run.
+RUN code-server --install-extension ms-python.python
+RUN code-server --install-extension golang.Go
+RUN code-server --install-extension eamodio.gitlens
+RUN code-server --install-extension vscjava.vscode-java-pack
+RUN ode-server --install-extension vscjava.vscode-maven
+RUN code-server --install-extension vscjava.vscode-java-test
+RUN code-server --install-extension vscjava.vscode-java-debug
+
 USER 1000
 ENV USER=coder
 WORKDIR /home/coder
