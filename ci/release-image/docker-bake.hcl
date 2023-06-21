@@ -16,7 +16,6 @@ variable "GITHUB_REGISTRY" {
 
 group "default" {
     targets = [
-        "code-server-debian-11", 
         "code-server-ubuntu-focal",
     ]
 }
@@ -41,7 +40,6 @@ function "gen_tags_for_docker_and_ghcr" {
     params = [tag]
     result = concat(
         gen_tags("${DOCKER_REGISTRY}", "${tag}"),
-        gen_tags("${GITHUB_REGISTRY}", "${tag}"),
     )
 }
 
@@ -58,8 +56,7 @@ target "code-server-debian-11" {
 target "code-server-ubuntu-focal" {
     dockerfile = "ci/release-image/Dockerfile"
     tags = concat(
-        gen_tags_for_docker_and_ghcr("ubuntu"),
-        gen_tags_for_docker_and_ghcr("focal"),
+        gen_tags_for_docker_and_ghcr("")
     )
     args = {
         BASE = "ubuntu:focal"

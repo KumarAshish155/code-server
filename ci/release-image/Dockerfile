@@ -6,6 +6,9 @@ COPY release-packages/code-server*.deb /tmp/
 
 FROM $BASE
 
+ENV TZ=Asia/Kolkata \
+    DEBIAN_FRONTEND=noninteractive
+
 RUN apt-get update \
   && apt-get install -y \
     curl \
@@ -23,7 +26,11 @@ RUN apt-get update \
     vim.tiny \
     lsb-release \
   && git lfs install \
-  && rm -rf /var/lib/apt/lists/*
+  && rm -rf /var/lib/apt/lists/* \
+  && rm -rf /etc/apt/sources.list.d/*
+
+
+
 
 # https://wiki.debian.org/Locale#Manually
 RUN sed -i "s/# en_US.UTF-8/en_US.UTF-8/" /etc/locale.gen \
@@ -43,14 +50,70 @@ RUN ARCH="$(dpkg --print-architecture)" \
 COPY ci/release-image/entrypoint.sh /usr/bin/entrypoint.sh
 RUN --mount=from=packages,src=/tmp,dst=/tmp/packages dpkg -i /tmp/packages/code-server*$(dpkg --print-architecture).deb
 
+RUN mkdir /usr/local/.nvm \
+mkdir /usr/local/node
+
+RUN apt install -y curl
+ENV NVM_DIR=/usr/local/.nvm
+ENV NODE_VERSION=14.21.3
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+RUN . "$NVM_DIR/nvm.sh" && nvm install ${NODE_VERSION}
+RUN . "$NVM_DIR/nvm.sh" && nvm use v${NODE_VERSION}
+RUN . "$NVM_DIR/nvm.sh" && nvm alias default v${NODE_VERSION}
+ENV PATH="${NVM_DIR}/versions/node/v${NODE_VERSION}/bin/:${PATH}"
+RUN node --version
+RUN npm --version
+
+#Installing Go Lang
+ENV GO_VERSION=1.20
+RUN ARCH="$(dpkg --print-architecture)" \
+&& curl -fsSL "https://golang.org/dl/go${GO_VERSION}.linux-$ARCH.tar.gz" |tar -C /usr/local -xzf -
+# RUN mv go /usr/local
+# ENV GOROOT=/usr/local/go
+# ENV GOPATH=$HOME/go
+# ENV PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+ENV PATH=$PATH:/usr/local/go/bin
+
+RUN go version
+
+
+RUN apt-get update \
+  && apt-get install -y \
+  # golang-1.20 \
+  ruby-full \
+  wget \
+  openjdk-8-jdk \
+  maven \
+  python \
+  python2.7
+
+
+
+RUN apt install -y build-essential apt-transport-https ca-certificates
+
+
+RUN sudo apt update && sudo apt install  ruby-dev ruby -y && sudo gem install compass
+
+RUN npm --version
+
+RUN npm install -g bower && npm install -g yarn && npm install -g grunt
+
 # Allow users to have scripts run on container startup to prepare workspace.
 # https://github.com/coder/code-server/issues/5177
 ENV ENTRYPOINTD=${HOME}/entrypoint.d
 
-EXPOSE 8080
+EXPOSE 8080 3001 3002 3003 8081 8082 8083
 # This way, if someone sets $DOCKER_USER, docker-exec will still work as
 # the uid will remain the same. note: only relevant if -u isn't passed to
 # docker-run.
+RUN code-server --install-extension ms-python.python
+RUN code-server --install-extension golang.Go
+RUN code-server --install-extension eamodio.gitlens
+RUN code-server --install-extension vscjava.vscode-java-pack
+RUN ode-server --install-extension vscjava.vscode-maven
+RUN code-server --install-extension vscjava.vscode-java-test
+RUN code-server --install-extension vscjava.vscode-java-debug
+
 USER 1000
 ENV USER=coder
 WORKDIR /home/coder
